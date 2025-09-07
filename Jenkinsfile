@@ -34,7 +34,7 @@ pipeline {
             agent { 
                 docker { 
                     image 'registry.gitlab.com/robconnolly/docker-ansible:latest' 
-                    args '-v /root/.ssh/jenkins_vm_key:/root/.ssh/jenkins_vm_key:rw'
+                    args '-v /root/.ssh:/root/.ssh:rw'
             } }
             stages {
                stage("Deploy app in production") {
