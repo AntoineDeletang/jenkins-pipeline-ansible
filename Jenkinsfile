@@ -34,7 +34,6 @@ pipeline {
             agent { 
                 docker { 
                     image 'registry.gitlab.com/robconnolly/docker-ansible:latest' 
-                    args '-v /root/.ssh:/root/ssh_copy:rw'
             } }
             stages {
                stage("Deploy app in production") {
@@ -43,8 +42,7 @@ pipeline {
                     }
                    steps {
                        sh '''
-                       cp -r /root/ssh_copy/jenkins_vm_key /tmp/jenkins_key.txt
-                       chmod 600 /tmp/jenkins_key.txt
+                       echo "$JENKINS_PRIVATE_KEY" > /tmp/jenkins_key
                        apt-get update
                        apt-get install -y sshpass
                        ansible-playbook  -i hosts.yml --vault-password-file vault.key  --extra-vars "ansible_sudo_pass=$SUDOPASS" deploy.yml
