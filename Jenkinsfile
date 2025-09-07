@@ -43,7 +43,7 @@ pipeline {
                     }
                    steps {
                        sh '''
-                       cp /root/ssh_copy/jenkins_vm_key /tmp/jenkins_key
+                       cp -r /root/ssh_copy/jenkins_vm_key /tmp/jenkins_key
                        chmod 600 /tmp/jenkins_key
                        apt-get update
                        apt-get install -y sshpass
