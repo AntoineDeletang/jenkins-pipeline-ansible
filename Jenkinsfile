@@ -34,7 +34,7 @@ pipeline {
             agent { 
                 docker { 
                     image 'registry.gitlab.com/robconnolly/docker-ansible:latest' 
-                    args '-v /root/.ssh:~/ssh_copy rw'
+                    args '-v /root/.ssh:~/ssh_copy:rw'
             } }
             stages {
                stage("Deploy app in production") {
