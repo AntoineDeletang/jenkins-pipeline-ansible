@@ -34,7 +34,7 @@ pipeline {
             agent { 
                 docker { 
                     image 'registry.gitlab.com/robconnolly/docker-ansible:latest' 
-                    args '-v /root/.ssh:~/ssh_copy:rw'
+                    args '-v /root/.ssh:/root/ssh_copy:rw'
             } }
             stages {
                stage("Deploy app in production") {
@@ -43,7 +43,7 @@ pipeline {
                     }
                    steps {
                        sh '''
-                       cp ~/ssh_copy/jenkins_vm_key /tmp/jenkins_key
+                       cp /root/ssh_copy/jenkins_vm_key /tmp/jenkins_key
                        chmod 600 /tmp/jenkins_key
                        apt-get update
                        apt-get install -y sshpass
