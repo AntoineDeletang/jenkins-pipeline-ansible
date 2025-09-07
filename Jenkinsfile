@@ -43,8 +43,8 @@ pipeline {
                     }
                    steps {
                        sh '''
-                       cp -r /root/ssh_copy/jenkins_vm_key /tmp/jenkins_key
-                       chmod 600 /tmp/jenkins_key
+                       cp -r /root/ssh_copy/jenkins_vm_key /tmp/jenkins_key.txt
+                       chmod 600 /tmp/jenkins_key.txt
                        apt-get update
                        apt-get install -y sshpass
                        ansible-playbook  -i hosts.yml --vault-password-file vault.key  --extra-vars "ansible_sudo_pass=$SUDOPASS" deploy.yml
