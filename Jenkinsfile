@@ -47,7 +47,7 @@ pipeline {
                        chmod 600 /tmp/jenkins_key
                        apt-get update
                        apt-get install -y sshpass
-                       ansible-playbook  -i hosts.yml --vault-password-file vault.key  --extra-vars "ansible_sudo_pass=$SUDOPASS" deploy.yml
+                       ansible-playbook  -i hosts.yml --private-key=$JENKINS_PRIVATE_KEY --vault-password-file vault.key  --extra-vars "ansible_sudo_pass=$SUDOPASS" deploy.yml
                        '''
                    }
                } 
