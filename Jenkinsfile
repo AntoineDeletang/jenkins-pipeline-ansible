@@ -29,6 +29,7 @@ pipeline {
         stage('Test and deploy the application') {
             environment {
                 SUDOPASS = credentials('sudopass')
+                JENKINS_PRIVATE_KEY = credentials('jenkins_container_private_key')
             }
             agent { docker { image 'registry.gitlab.com/robconnolly/docker-ansible:latest' } }
             stages {
@@ -40,6 +41,7 @@ pipeline {
                        sh '''
                        apt-get update
                        apt-get install -y sshpass
+                       echo $JENKINS_PRIVATE_KEY > ~/.ssh/jenkins_vm_key
                        ansible-playbook  -i hosts.yml --vault-password-file vault.key  --extra-vars "ansible_sudo_pass=$SUDOPASS" deploy.yml
                        '''
                    }
